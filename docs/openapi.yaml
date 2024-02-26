@@ -1,0 +1,179 @@
+# Generated file
+openapi: 3.0.0
+info:
+  title: User management REST API
+  version: 1.0.0
+servers:
+  - url: /
+paths:
+  /users:
+    get:
+      responses:
+        "200":
+          description: OK
+      summary: Get all users
+      tags:
+        - Users
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/_users_post_request"
+        required: true
+      responses:
+        "201":
+          description: Created
+      summary: Add a new user
+      tags:
+        - Users
+  /users/{id}:
+    delete:
+      parameters:
+        - explode: false
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          style: simple
+      responses:
+        "204":
+          description: No Content
+      summary: Delete a user by ID
+      tags:
+        - Users
+    get:
+      parameters:
+        - explode: false
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          style: simple
+      responses:
+        "200":
+          description: OK
+      summary: Get a user by ID
+      tags:
+        - Users
+    put:
+      parameters:
+        - explode: false
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/_users_post_request"
+        required: true
+      responses:
+        "200":
+          description: OK
+      summary: Update a user by ID
+      tags:
+        - Users
+  /groups:
+    get:
+      responses:
+        "200":
+          description: OK
+      summary: Get all groups
+      tags:
+        - Groups
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/_groups_post_request"
+        required: true
+      responses:
+        "201":
+          description: Created
+      summary: Add a new group
+      tags:
+        - Groups
+  /groups/{id}:
+    delete:
+      parameters:
+        - explode: false
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          style: simple
+      responses:
+        "204":
+          description: No Content
+      summary: Delete a group by ID
+      tags:
+        - Groups
+    get:
+      parameters:
+        - explode: false
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          style: simple
+      responses:
+        "200":
+          description: OK
+      summary: Get a group by ID
+      tags:
+        - Groups
+    put:
+      parameters:
+        - explode: false
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/_groups_post_request"
+        required: true
+      responses:
+        "200":
+          description: OK
+      summary: Update a group by ID
+      tags:
+        - Groups
+components:
+  schemas:
+    _groups_post_request:
+      properties:
+        name:
+          type: string
+      type: object
+      required:
+        - name
+    _users_post_request:
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        name:
+          type: string
+        group_id:
+          type: integer
+      type: object
+      required:
+        - email
+        - password
+        - name
+        - group_id
