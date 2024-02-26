@@ -1,0 +1,32 @@
+name: Docker Compose CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Compose
+      run: |
+        sudo apt-get update
+        sudo apt-get -y install docker-compose
+
+    - name: Build and run Docker Compose
+      run: |
+        docker-compose up -d --build
+        docker-compose ps
+
+    - name: Check for errors
+      run: |
+        if [ "$(docker-compose ps --services --filter 'status=exited' | wc -l)" -gt 0 ]; then
+          echo "Error: Some containers exited unexpectedly."
+          docker-compose logs
+          exit 1
+        fi
